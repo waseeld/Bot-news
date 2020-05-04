@@ -1,0 +1,16 @@
+function v_users(user) {
+    var data
+    var url_api = "http://nahn.tech/bots/bot1/read.php"
+    request({
+        url: url_apirl,
+        json: true
+    }, function (error, response, body) {
+    
+        if (!error && response.statusCode === 200) {
+            console.log(body['data']) // Print the json response
+            data = body
+        }
+    })
+    return true
+
+}
