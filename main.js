@@ -18,7 +18,7 @@ function v_user(id_num, ids) {
 const Telegraf = require('telegraf')
 var request = require("request");
 var cron = require('node-cron');
-const token = "1088926767:AAFWTZkLI-hz5lZV-eRHNmzt10OiFaTxub0"
+const token = "your-token"
 /////////
 var data
 var options = {
