@@ -14,11 +14,12 @@ function v_user(id_num, ids) {
     return arrFound
 }
 ////////
-// var TelegramBot = require('node-telegram-bot-api')
-const Telegraf = require('telegraf')
+const Telegraf = require('grammy')
 var request = require("request");
 var cron = require('node-cron');
-const token = "your-token"
+require('dotenv').config()
+const { Bot } = require("grammy")
+const bot = new Bot(process.env.Bot_token)
 /////////
 var data
 var options = {

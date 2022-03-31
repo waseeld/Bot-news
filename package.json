@@ -9,11 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-cron": "^2.0.3",
-    "node-telegram-bot-api": "^0.40.0",
+    "dotenv": "^16.0.0",
+    "grammy": "^1.7.1",
+    "node-cron": "^3.0.0",
     "request": "^2.88.2",
-    "telegraf": "^3.37.0",
-    "telegram-node-bot": "^4.0.5",
-    "xml-js": "^1.6.11"
+    "request-promise": "^4.2.6",
+    "xml2js": "^0.4.23"
   }
 }
