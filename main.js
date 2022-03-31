@@ -1,57 +1,28 @@
-
-function v_user(id_num, ids) {
-    var result = ids
-    var arrFound
-    for (let index = 0; index < result.length; index++) {
-        if (id_num != result[index]) {
-            arrFound = true
-        } else {
-            arrFound = false
-        }
-
-    }
-    console.log(arrFound + " ==" + id_num);
-    return arrFound
-}
-////////
-const Telegraf = require('grammy')
-var request = require("request");
 var cron = require('node-cron');
 require('dotenv').config()
 const { Bot } = require("grammy")
 const bot = new Bot(process.env.Bot_token)
-/////////
-var data
-var options = {
-    method: 'GET',
-    json: true,
-    url: 'http://wajp.esy.es/podcast/read.php',
-};
-const bot = new Telegraf(token)
+
+const rss = require('./src/rss');
+const news = require('./src/news');
 
 cron.schedule('* * * * *', () => {
-    request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-        data = body
-        console.log(data);
-        var ids = [
-            '2082363', '2082361', '2082359',
-            '2082358', '2082355', '2082354',
-            '2082353', '2082352', '2082351',
-            '2082350', '2082349', '2082345',
-            '2082340', '2082339', '2082338'
-        ]
-        for (let index = 0; index < data.channel.item.length; index++) {
-            var id = data.channel.item[index].id;
-            var title = data.channel.item[index].title;
-            var ulr = data.channel.item[index].link;
-            if (v_user(id, ids)) {
-                // bot.telegram.sendMessage('-1001307080127', title + "\n" + ulr)
-                ids.push(id);
+    console.log("Start Checking at " + new Date());
+    rss().then(data => {
+        // console.log(JSON.stringify(data, null, 4));
+        let items = data.data[0].item
+        items.forEach(e => {
+            let id = e.id[0]
+            let title = e.title[0]
+            let link = e.link[0]
+            if(!news.IsExist(id)){
+                bot.api.sendMessage('-1001307080127', title + "\n" + link).then(()=> {
+                    news.addNews(id)
+                    console.log("Post one : " + id);
+                })
             }
-
-        }
-        console.log(ids)
-    });
+        });
+    })
+   
 });
 

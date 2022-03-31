@@ -12,6 +12,7 @@
     "dotenv": "^16.0.0",
     "grammy": "^1.7.1",
     "node-cron": "^3.0.0",
+    "ranidb": "https://github.com/waseeld/ranidb.git",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "xml2js": "^0.4.23"
